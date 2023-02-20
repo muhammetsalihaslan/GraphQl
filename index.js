@@ -3,8 +3,11 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 
 const typeDefs = `#graphql
   type Book {
-    title: String
+    id : ID!
+    title: String!
     author: String
+    score: Float
+    isPublished: Boolean
   }
 
   type Query {
@@ -14,10 +17,14 @@ const typeDefs = `#graphql
 
 const books = [
   {
+    id: "makajsns",
     title: "The Awakening",
     author: "Kate Chopin",
+    score: 6.9,
+    isPublished: true,
   },
   {
+    id: "bdnhdbd",
     title: "City of Glass",
     author: "Paul Auster",
   },
