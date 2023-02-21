@@ -19,35 +19,42 @@ const typeDefs = `#graphql
 
   type Query {
     books: [Book]
-    author: [Author]
+    book(id : ID):Book!
+    authors: [Author]
   }
 `; //type yapılarını belirledik
-const author = {
-  id: "1",
-  name: "Albert",
-  surname: "Camus",
-  age: "50",
-};
+const authors = [
+  {
+    id: "1",
+    name: "Albert",
+    surname: "Camus",
+    age: "50",
+  },
+];
 
 const books = [
   {
-    id: "makajsns",
+    id: "2",
     title: "The Awakening",
-    author,
+    author: authors[0],
     score: 6.9,
     isPublished: true,
   },
   {
-    id: "bdnhdbd",
+    id: "3",
     title: "City of Glass",
-    author,
+    author: authors[0],
   },
 ];
 
 const resolvers = {
   Query: {
     books: () => books,
-    author: () => author,
+    book: (parent, args) => {
+      const data = books.find((book) => book.id === args.id);
+      return data;
+    },
+    authors: () => authors,
   },
 };
 
